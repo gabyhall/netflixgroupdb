@@ -26,7 +26,7 @@ exports.updatePassword = async (req, res) => {
             username: req.body.username,
             password: req.body.password,
         }
-        const updatedUser = await User.updateOne({username: user.username, password: user.password});
+        await User.updateOne({username: user.username, password: user.password});
         res.status(200).send( {user: user, message: 'Password updated'});
     } catch (error) {
         res.status(500).send(error);
@@ -36,7 +36,7 @@ exports.updatePassword = async (req, res) => {
 exports.deleteUser = async (req, res) => {
     try {
         const user = req.params.username;
-        const deletedUser = await User.deleteOne({username: user });
+        await User.deleteOne({username: user});
         res.status(200).send({ message: 'User deleted from database' });
     } catch (error) {
         res.status(500).send(error);
