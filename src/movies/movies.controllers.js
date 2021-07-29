@@ -1,15 +1,17 @@
 const Movie = require('./movies.model');
+const User = require('../users/users.model');
 
 exports.createMovie = async (req, res) => {
     try {
     
-        const movie = new Movie({      //trying to connect with user //
+        const movie = new Movie({      //connects with user //
             title: req.body.title,
             actor: req.body.actor,
-            user: req.body.user._id,
         });
-        const userMovie = movie.populate({path: '', select: 'username'});
-        const savedMovie = await userMovie.save();
+        const savedMovie = await movie.save();
+        const user = req.body.user;
+        const dbUser = await User.findOne({username: user});
+        await Movie.findOne({title: movie.title}).updateOne({user: dbUser})
         res.status(200).send({ movie: savedMovie, message: "Movie created in database"});
     } catch (error) {
         res.status(500).send(error);
@@ -30,7 +32,7 @@ exports.updateWatched =  async (req, res) => {
     try {
         const movie = {
             title: req.body.title,
-                                        // add in user here and in findOne once linked? //
+                                        // add in user here and in findOne //
         }
         const targetMovie = await Movie.findOne({title: movie.title});
         targetMovie.watched = true;
@@ -45,7 +47,7 @@ exports.rateMovie =  async (req, res) => {
     try {
         const movie = {
             title: req.body.title,
-                                       // add in user here and in updateOne once linked? //
+                                       // add in user here - also fix params issue - have to put title in params & in body or does updateWatched atm //
             rating: req.body.rating,
         }
         await Movie.updateOne({title: movie.title, rating: movie.rating});

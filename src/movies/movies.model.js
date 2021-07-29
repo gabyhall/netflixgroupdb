@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const movieSchema = new mongoose.Schema({
     user: {
-        userID: [{type: mongoose.Schema.Types.ObjectID, ref: 'User'}],
+        type: mongoose.Schema.Types.ObjectId, ref: 'User',
     },
     title: {
         type: String,
