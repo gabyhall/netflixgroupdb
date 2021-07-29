@@ -3,12 +3,12 @@ const Movie = require('./movies.model');
 exports.createMovie = async (req, res) => {
     try {
     
-        const movie = new Movie({      //trying to connect with user - work out why not working tomorrow //
+        const movie = new Movie({      //trying to connect with user //
             title: req.body.title,
             actor: req.body.actor,
             user: req.body.user._id,
         });
-        const userMovie = movie.populate('user');
+        const userMovie = movie.populate({path: '', select: 'username'});
         const savedMovie = await userMovie.save();
         res.status(200).send({ movie: savedMovie, message: "Movie created in database"});
     } catch (error) {

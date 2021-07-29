@@ -2,8 +2,7 @@ const mongoose = require('mongoose');
 
 const movieSchema = new mongoose.Schema({
     user: {
-        type: mongoose.Schema.Types.ObjectID, //trying to connect with user - work out why not working tomorrow //
-        ref: 'User'
+        userID: [{type: mongoose.Schema.Types.ObjectID, ref: 'User'}],
     },
     title: {
         type: String,
