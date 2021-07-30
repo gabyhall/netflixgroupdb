@@ -9,7 +9,8 @@ const movieSchema = new mongoose.Schema({
         required: true,
     },
     actor: {
-        type: String
+        type: String,
+        required: true,
     },
     watched: {
         type: Boolean,
