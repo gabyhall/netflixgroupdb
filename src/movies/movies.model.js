@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 
 const movieSchema = new mongoose.Schema({
     user: {
-        type: mongoose.Schema.Types.ObjectId, ref: 'User',
-        
+        type: String,
+        required: true,
     },
     title: {
         type: String,
@@ -11,7 +11,7 @@ const movieSchema = new mongoose.Schema({
     },
     release: {
         type: String,
-        
+        required: true,
     },
     watched: {
         type: Boolean,
@@ -23,7 +23,7 @@ const movieSchema = new mongoose.Schema({
     },
     filmID: {
         type: String,
-        
+        required: true,
     }
 });
 
